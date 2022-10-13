@@ -2,10 +2,16 @@ const bcrypt = require("bcrypt");
 const { Router } = require("express");
 const { toJWT } = require("../auth/jwt");
 const authMiddleware = require("../auth/middleware");
-const User = require("../models/").user;
+
 const { SALT_ROUNDS } = require("../config/constants");
 
 const router = new Router();
+
+const Photos = require("../models").photo;
+const Posts = require("../models").post;
+const User = require("../models/").user;
+const Restaurants = require("../models").restaurant;
+const News = require("../models").news;
 
 //login
 router.post("/login", async (req, res, next) => {
@@ -37,8 +43,8 @@ router.post("/login", async (req, res, next) => {
 
 //signup
 router.post("/signup", async (req, res) => {
-  const { email, password, name, image } = req.body;
-  if (!email || !password || !name) {
+  const { email, password, firstName, lastName, image } = req.body;
+  if (!email || !password || !firstName || !lastName) {
     return res.status(400).send("Please provide an email, password and a name");
   }
 
@@ -46,7 +52,8 @@ router.post("/signup", async (req, res) => {
     const newUser = await User.create({
       email,
       password: bcrypt.hashSync(password, SALT_ROUNDS),
-      name,
+      firstName,
+      lastName,
       image,
     });
 

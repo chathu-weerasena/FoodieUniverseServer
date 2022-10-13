@@ -39,7 +39,7 @@ router.get("/restaurants", auth, async (req, res, next) => {
       include: [{ model: Users }, { model: Restaurants }],
       order: [["createdAt", "DESC"]],
     });
-    res.status(200).send(posts);
+    res.status(200).send({ postRestaurants: posts });
 
     //console.log("Posts", posts);
   } catch (e) {
@@ -56,7 +56,7 @@ router.get("/news", auth, async (req, res, next) => {
       include: [{ model: Users }, { model: News }],
       order: [["createdAt", "DESC"]],
     });
-    res.status(200).send(posts);
+    res.status(200).send({ postNews: posts });
 
     //console.log("News", news);
   } catch (e) {
@@ -65,6 +65,7 @@ router.get("/news", auth, async (req, res, next) => {
   }
 });
 
+//endroute to "profile feed"
 router.get("/profile/feed", auth, async (req, res, next) => {
   try {
     const posts = await Posts.findAll({
@@ -85,4 +86,5 @@ router.get("/profile/feed", auth, async (req, res, next) => {
     next(e);
   }
 });
+
 module.exports = router;
