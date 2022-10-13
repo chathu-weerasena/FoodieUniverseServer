@@ -8,16 +8,16 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      post.hasOne(models.user, { foreignKey: "userId" });
-      post.hasMany(models.photo, { foreignKey: "postId" });
-      post.hasMany(models.restaurant, { foreignKey: "postId" });
-      post.hasMany(models.news, { foreignKey: "postId" });
+      post.belongsTo(models.user, { foreignKey: "userId" });
+      post.hasOne(models.photo, { foreignKey: "postId" });
+      post.hasOne(models.restaurant, { foreignKey: "postId" });
+      post.hasOne(models.news, { foreignKey: "postId" });
       post.hasMany(models.comment, { foreignKey: "postId" });
     }
   }
   post.init(
     {
-      postType: { type: DataTypes.STRING, allowNull: false },
+      postType: { type: DataTypes.SMALLINT, allowNull: false },
     },
     {
       sequelize,

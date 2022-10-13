@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       postType: {
-        type: Sequelize.STRING,
+        type: Sequelize.SMALLINT,
         allowNull: false,
       },
       createdAt: {
