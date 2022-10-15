@@ -7,6 +7,7 @@ const Posts = require("../models").post;
 const Users = require("../models").user;
 const Restaurants = require("../models").restaurant;
 const News = require("../models").news;
+const Comments = require("../models").comment;
 
 //??
 // /posts/
@@ -87,7 +88,7 @@ router.get("/profile/feed", auth, async (req, res, next) => {
   }
 });
 
-// End Point for the " Update mySpace"
+// End Point for the " Update a post"
 router.patch("/:id", auth, async (req, res, next) => {
   const { id } = req.params;
   const { title, content, image, name, address, endDate } = req.body;
@@ -106,10 +107,57 @@ router.patch("/:id", auth, async (req, res, next) => {
     title: title,
     content: content,
     image: image,
-    na,
+    name: name,
+    address: address,
+    endDate: endDate,
   });
   console.log(updatedSpace);
-  return res.status(200).send({ space: updatedSpace });
+  return res.status(200).send({ post: updatedPost });
+});
+
+//04- Delete a post (/delete with .destroy)
+router.delete("/:id", auth, async (req, res, next) => {
+  try {
+    const { id } = req.body;
+
+    const post = await Posts.findByPk(id, [
+      { include: Photos },
+      { include: Restaurants },
+      { include: News },
+    ]);
+    if (!post) {
+      return res.status(404).send("Post is no longer available");
+    }
+    if (post.userId !== req.user.id) {
+      return res
+        .status(401)
+        .send("You don't have permission to delete selected post");
+    }
+
+    await post.destroy();
+    res.send("Deleted", id);
+  } catch (e) {
+    console.log(e.message);
+    next(e);
+  }
+});
+
+//adding a "Comment"
+router.post("/:id/comments", auth, async (req, res, next) => {
+  const post = await Posts.findByPk(req.params.id);
+
+  if (post === null) {
+    res.status(400).send("This post is no longer availble");
+  }
+
+  const { content } = req.body;
+
+  const newComment = await Comments.create({
+    content,
+    userId: req.user.id,
+    postId: req.params.id,
+  });
+  res.status(201).send({ comment: newComment });
 });
 
 module.exports = router;
