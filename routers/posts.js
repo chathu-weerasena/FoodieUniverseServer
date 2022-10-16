@@ -118,13 +118,9 @@ router.patch("/:id", auth, async (req, res, next) => {
 //04- Delete a post (/delete with .destroy)
 router.delete("/:id", auth, async (req, res, next) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
 
-    const post = await Posts.findByPk(id, [
-      { include: Photos },
-      { include: Restaurants },
-      { include: News },
-    ]);
+    const post = await Posts.findByPk(id, { include: News });
     if (!post) {
       return res.status(404).send("Post is no longer available");
     }
@@ -140,6 +136,66 @@ router.delete("/:id", auth, async (req, res, next) => {
     console.log(e.message);
     next(e);
   }
+});
+
+//add new post
+
+router.post("/", auth, async (req, res, next) => {
+  const { postType, image, content, name, title, address, endDate } = req.body;
+  const type = Number(postType);
+  if (type === 1) {
+    if (!title || !image || !content) {
+      return res.status(400).send("Please fill in the required fields");
+    }
+  }
+  if (type === 2) {
+    if (!name || !image || !content || !address) {
+      return res.status(400).send("Please fill in the required fields");
+    }
+  }
+  if (type === 3) {
+    if (!title || !endDate || !content || !address) {
+      return res.status(400).send("Please fill in the required fields");
+    }
+  }
+
+  const newPost = await Posts.create({
+    userId: req.user.id,
+    postType: postType,
+  });
+
+  switch (type) {
+    case 1:
+      await Photos.create({
+        title,
+        image,
+        content,
+        postId: newPost.id,
+      });
+      break;
+    case 2:
+      await Restaurants.create({
+        name,
+        image,
+        content,
+        address,
+        postId: newPost.id,
+      });
+      break;
+    case 3:
+      await News.create({
+        title,
+        content,
+        address,
+        endDate,
+        postId: newPost.id,
+      });
+      break;
+  }
+  const post = await Posts.findByPk(newPost.id, {
+    include: [{ model: News }, { model: Restaurants }, { model: Photos }],
+  });
+  return res.status(200).send({ addedPost: post });
 });
 
 //adding a "Comment"
