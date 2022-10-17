@@ -88,32 +88,32 @@ router.get("/profile/feed", auth, async (req, res, next) => {
   }
 });
 
-// End Point for the " Update a post"
-router.patch("/:id", auth, async (req, res, next) => {
-  const { id } = req.params;
-  const { title, content, image, name, address, endDate } = req.body;
+// // End Point for the " Update a post"
+// router.patch("/:id", auth, async (req, res, next) => {
+//   const { id } = req.params;
+//   const { title, content, image, name, address, endDate } = req.body;
 
-  const post = await Posts.findByPk(id);
-  if (!post.userId === req.user.id) {
-    return res
-      .status(403)
-      .send("You don't have permission to change the space");
-  }
-  const updatedPost = await Posts.findByPk(post.id, {
-    include: [{ model: Photos }, { model: Restaurants }, { model: News }],
-  });
+//   const post = await Posts.findByPk(id);
+//   if (!post.userId === req.user.id) {
+//     return res
+//       .status(403)
+//       .send("You don't have permission to change the space");
+//   }
+//   const updatedPost = await Posts.findByPk(post.id, {
+//     include: [{ model: Photos }, { model: Restaurants }, { model: News }],
+//   });
 
-  updatedPost.update({
-    title: title,
-    content: content,
-    image: image,
-    name: name,
-    address: address,
-    endDate: endDate,
-  });
-  console.log(updatedSpace);
-  return res.status(200).send({ post: updatedPost });
-});
+//   updatedPost.update({
+//     title: title,
+//     content: content,
+//     image: image,
+//     name: name,
+//     address: address,
+//     endDate: endDate,
+//   });
+//   console.log(updatedPost);
+//   return res.status(200).send({ post: updatedPost });
+// });
 
 //04- Delete a post (/delete with .destroy)
 router.delete("/:id", auth, async (req, res, next) => {
@@ -138,7 +138,7 @@ router.delete("/:id", auth, async (req, res, next) => {
   }
 });
 
-//add new post
+//add a "new post"
 
 router.post("/", auth, async (req, res, next) => {
   const { postType, image, content, name, title, address, endDate } = req.body;
