@@ -39,6 +39,7 @@ module.exports = {
       onUpdate: "CASCADE",
       onDelete: "SET NULL",
     });
+
     await queryInterface.addColumn("comments", "postId", {
       type: Sequelize.INTEGER,
       references: {
@@ -55,6 +56,7 @@ module.exports = {
     await queryInterface.removeColumn("photos", "postId");
     await queryInterface.removeColumn("restaurants", "postId");
     await queryInterface.removeColumn("news", "postId");
+
     await queryInterface.removeColumn("comments", "postId");
   },
 };

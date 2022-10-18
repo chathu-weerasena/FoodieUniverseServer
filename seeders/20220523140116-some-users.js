@@ -55,6 +55,56 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          firstName: "Randall",
+          lastName: "Pearson",
+          email: "randall@randall.com",
+          password: bcrypt.hashSync("randall", 10),
+          image:
+            "https://i.pinimg.com/564x/66/50/4f/66504fac979b8a1cbd7862c08970bedd.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          firstName: "Mandy",
+          lastName: "Moore",
+          email: "mandy@mandy.com",
+          password: bcrypt.hashSync("mandy", 10),
+          image:
+            "https://upload.wikimedia.org/wikipedia/commons/9/9a/Mandy_Moore_at_SXSW_2018_%2825904503147%29_%28cropped%29.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          firstName: "Charles",
+          lastName: "Leclerc",
+          email: "char@char.com",
+          password: bcrypt.hashSync("charles", 10),
+          image:
+            "https://pbs.twimg.com/profile_images/1276567411240681472/8KdXHFdK_400x400.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          firstName: "Mad Batter",
+          lastName: "By Sav",
+          email: "mad@mad.com",
+          password: bcrypt.hashSync("mad", 10),
+          image:
+            "https://static.wixstatic.com/media/7d8c70_177278344ba14be9b535d49ae15183f7~mv2.jpg/v1/fill/w_257,h_247,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/16AAACBD-299D-4234-B196-B12EA795BB1F-B88A9167-DA23-49D9-9253-7A1F94F634C0.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          firstName: "Mariano",
+          lastName: "Ktchen",
+          email: "mariano@mariano.com",
+          password: bcrypt.hashSync("mariano", 10),
+          image:
+            "https://cdn.shopify.com/s/files/1/0595/1547/0015/products/MG83.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

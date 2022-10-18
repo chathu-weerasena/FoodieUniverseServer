@@ -61,6 +61,52 @@ module.exports = {
           updatedAt: new Date(),
           postId: 11,
         },
+        {
+          name: "Ixi Modern Asian Cuisine",
+          address: "Veilinghavenkade 115-127, 3521 AT Utrecht Nederland",
+          content:
+            "Vriendelijk personeel, gezellige tent en prima eten. De sushi is heerlijke en gevarieerd. De wijn is wel relatief duur.",
+          image:
+            "https://media-cdn.tripadvisor.com/media/photo-s/23/74/9a/23/restaurant.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          postId: 21,
+        },
+        {
+          name: "Carlo's Bakery",
+          address: "625 8th Ave & W42nd St Times Square, New York, NY 10036",
+          content:
+            "During our trip to the USA my daughter thought that we absolutely had to eat a cake at Carlos. I don't like this much so I left it at a bite of hers. ",
+          image:
+            "https://media-cdn.tripadvisor.com/media/photo-f/03/bd/76/cf/cake-boss-cafe.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          postId: 22,
+        },
+        {
+          name: "Horizon Rooftop",
+          address:
+            "12 Avenue des Spelugues Rooftop du Fairmont Monte Carlo, Monte Carlo 98000 Monaco",
+          content:
+            "eaten in several times for breakfast, lunch and dinner. The view is fantastic and the service is very attentive.",
+          image:
+            "https://media-cdn.tripadvisor.com/media/photo-s/12/2a/a0/a8/horizon-terrace.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          postId: 23,
+        },
+        {
+          name: "Flying Fish Restaurant & Bar",
+          address:
+            "Level G, Harbourside, The Star, 80 Pyrmont St, Sydney, New South Wales 2009 Australië",
+          content:
+            "We had a really great experience at Flying Fish. The food and staff were great! I highly recommend The Flying Fish.",
+          image:
+            "https://media-cdn.tripadvisor.com/media/photo-f/17/48/5f/f9/flying-fish-restaurant.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          postId: 24,
+        },
       ],
       {}
     );

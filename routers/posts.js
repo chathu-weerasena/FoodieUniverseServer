@@ -15,6 +15,19 @@ const Comments = require("../models").comment;
 // /posts/restaurants
 // /posts/new
 
+// Endpoin for all the posts in the Posts model
+router.get("/", auth, async (req, res, next) => {
+  try {
+    const posts = await Posts.findAll({
+      order: [["createdAt", "DESC"]],
+    });
+    res.status(200).send({ Posts: posts });
+  } catch (e) {
+    console.log(e.message);
+    next(e);
+  }
+});
+
 //Endpoint for the "list of available photos" sorted by "CreatedAt".
 router.get("/photos", auth, async (req, res, next) => {
   try {
@@ -37,7 +50,7 @@ router.get("/restaurants", auth, async (req, res, next) => {
   try {
     const posts = await Posts.findAll({
       where: { postType: 2 },
-      include: [{ model: Users }, { model: Restaurants }],
+      include: [{ model: Users }, { model: Restaurants }, { model: Comments }],
       order: [["createdAt", "DESC"]],
     });
     res.status(200).send({ postRestaurants: posts });
@@ -120,7 +133,9 @@ router.delete("/:id", auth, async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const post = await Posts.findByPk(id, { include: News });
+    const post = await Posts.findByPk(id, {
+      include: [{ model: News }, { model: Photos }, { model: Restaurants }],
+    });
     if (!post) {
       return res.status(404).send("Post is no longer available");
     }
@@ -200,18 +215,18 @@ router.post("/", auth, async (req, res, next) => {
 
 //adding a "Comment"
 router.post("/:id/comments", auth, async (req, res, next) => {
-  const post = await Posts.findByPk(req.params.id);
+  const { id } = req.params;
+  const { content } = req.body;
+  const post = await Posts.findByPk(id);
 
   if (post === null) {
     res.status(400).send("This post is no longer availble");
   }
 
-  const { content } = req.body;
-
   const newComment = await Comments.create({
     content,
     userId: req.user.id,
-    postId: req.params.id,
+    postId: id,
   });
   res.status(201).send({ comment: newComment });
 });

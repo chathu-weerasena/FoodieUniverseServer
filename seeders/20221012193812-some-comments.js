@@ -4,55 +4,63 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert(
-      "news",
+      "comments",
       [
         {
-          title: "Wine Deals",
-          address: "Juan Grisstraat-44,1328KA,Almere",
-          content:
-            "Albert Heijn has new winde collection and has discounts for most of them. Worth checking it out",
-          endDate: "2022-10-30",
+          content: "My goodness the combo looks fabb!",
           createdAt: new Date(),
           updatedAt: new Date(),
-          postId: 12,
+
+          postId: 1,
         },
         {
-          title: "Buy two and pay for one",
-          address: "Brusselplein-15,3541CH,Utrecht",
-          content: "Fresh Ravioli deals are available in coming weekend",
-          endDate: "2022-10-23",
+          content: "Amazing meal. Mouthwatering",
           createdAt: new Date(),
           updatedAt: new Date(),
-          postId: 13,
+
+          postId: 1,
         },
         {
-          title: "Biologic baby food",
-          address: "Oude Molenweg-3b, 3941ZL,Doorn",
-          content: "New variety of bio baby food are available in the shop",
-          endDate: "2022-10-25",
+          content: "Can you send me some to New Jersey",
           createdAt: new Date(),
           updatedAt: new Date(),
-          postId: 14,
+
+          postId: 2,
         },
         {
-          title: "Romantic dinner in Utrecht city center",
-          address: "Oudegracht aan de Werf-143,3511AJ,Utrecht",
-          content:
-            "If you are living in Utrecht, this restaurant is ideal for romantic dinners. Staff is very friendy and they have an excellent menu",
-          endDate: "2022-12-31",
+          content: "Looks so good!",
           createdAt: new Date(),
           updatedAt: new Date(),
-          postId: 15,
+
+          postId: 2,
         },
         {
-          title: "Tapas and good wine",
-          address: "Spuistraat-299,1012VS,Amsterdam",
-          content:
-            "This tapas bar serves amazing collection and always paired with good wine",
-          endDate: "2022-12-15",
+          content: "Would love to follow for recipes!",
           createdAt: new Date(),
           updatedAt: new Date(),
-          postId: 16,
+
+          postId: 3,
+        },
+        {
+          content: "Looks Delicious!",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+
+          postId: 3,
+        },
+        {
+          content: "A favourite of mine..looks so good!",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+
+          postId: 4,
+        },
+        {
+          content: "my mother always used to make the recipe. !",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+
+          postId: 4,
         },
       ],
       {}
@@ -60,6 +68,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete("news", null, {});
+    await queryInterface.bulkDelete("comments", null, {});
   },
 };
