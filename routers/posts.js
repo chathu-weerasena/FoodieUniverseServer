@@ -33,7 +33,7 @@ router.get("/photos", auth, async (req, res, next) => {
   try {
     const posts = await Posts.findAll({
       where: { postType: 1 },
-      include: [{ model: Users }, { model: Photos }],
+      include: [{ model: Users }, { model: Photos }, { model: Comments }],
       order: [["createdAt", "DESC"]],
     });
     res.status(200).send({ postPhotos: posts });
