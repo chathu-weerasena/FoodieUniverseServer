@@ -33,7 +33,11 @@ router.get("/photos", auth, async (req, res, next) => {
   try {
     const posts = await Posts.findAll({
       where: { postType: 1 },
-      include: [{ model: Users }, { model: Photos }, { model: Comments }],
+      include: [
+        { model: Users },
+        { model: Photos },
+        { model: Comments, include: Users },
+      ],
       order: [["createdAt", "DESC"]],
     });
     res.status(200).send({ postPhotos: posts });
@@ -50,7 +54,11 @@ router.get("/restaurants", auth, async (req, res, next) => {
   try {
     const posts = await Posts.findAll({
       where: { postType: 2 },
-      include: [{ model: Users }, { model: Restaurants }, { model: Comments }],
+      include: [
+        { model: Users },
+        { model: Restaurants },
+        { model: Comments, include: Users },
+      ],
       order: [["createdAt", "DESC"]],
     });
     res.status(200).send({ postRestaurants: posts });
@@ -146,7 +154,7 @@ router.delete("/:id", auth, async (req, res, next) => {
     }
 
     await post.destroy();
-    res.send("Deleted", id);
+    res.send({ message: `Item with ${id} was deleted`, id: id });
   } catch (e) {
     console.log(e.message);
     next(e);

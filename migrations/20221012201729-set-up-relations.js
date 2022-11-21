@@ -49,6 +49,16 @@ module.exports = {
       onUpdate: "CASCADE",
       onDelete: "SET NULL",
     });
+
+    await queryInterface.addColumn("comments", "userId", {
+      type: Sequelize.INTEGER,
+      references: {
+        model: "users",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "SET NULL",
+    });
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -57,5 +67,6 @@ module.exports = {
     await queryInterface.removeColumn("restaurants", "postId");
     await queryInterface.removeColumn("news", "postId");
     await queryInterface.removeColumn("comments", "postId");
+    await queryInterface.removeColumn("comments", "userId");
   },
 };
