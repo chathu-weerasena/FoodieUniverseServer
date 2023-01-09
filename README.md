@@ -2,6 +2,8 @@
 
 This is a simple server template to for my students to start projects quickly.
 
+Deployed version : https://foodie-universe-server.vercel.app/
+
 ## Table of contents:
 
 - **[Setup](#setup-how-to-use-this-template)**
