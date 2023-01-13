@@ -2,7 +2,7 @@
 
 This is a simple server template to for my students to start projects quickly.
 
-Deployed version : https://foodie-universe-server.vercel.app/
+Deployed version : https://foodieuniverse.onrender.com/
 
 ## Table of contents:
 
